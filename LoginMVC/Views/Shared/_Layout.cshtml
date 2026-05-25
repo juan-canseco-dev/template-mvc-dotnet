@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Core Admin</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <link rel="stylesheet" href="~/LoginMVC.styles.css" asp-append-version="true" />
+
+    <style>
+            /* Lock viewport to exact screen height and disable scrolling entirely */
+            html, body {
+                height: 100vh;
+                overflow: hidden;
+            }
+
+            body {
+                font-size: .875rem;
+                background-color: #f8fafc;
+            }
+
+            /* Top Navbar Customizations */
+            .navbar-brand {
+                padding-top: .75rem;
+                padding-bottom: .75rem;
+                font-size: 1rem;
+                font-weight: 600;
+                letter-spacing: 0.5px;
+            }
+    </style>
+</head>
+<body>
+
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow-sm">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-4 bg-dark text-white border-bottom border-secondary border-opacity-25" asp-area="" asp-controller="Home" asp-action="Index">
+            <i class="fa-solid fa-layer-group text-primary me-2"></i>Core Admin
+        </a>
+
+        <ul class="navbar-nav ms-auto flex-row px-4">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+            </li>
+        </ul>
+    </header>
+
+    <div class="container-fluid h-100">
+        <div class="row h-100">
+            <main class="col-12 px-md-4 py-4">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

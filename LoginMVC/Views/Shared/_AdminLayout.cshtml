@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Core Admin</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+    <link rel="stylesheet" href="~/LoginMVC.styles.css" asp-append-version="true" />
+
+    <style>
+            body {
+                font-size: .875rem;
+                background-color: #f8fafc;
+            }
+
+            /* Top Navbar Customizations */
+            .navbar-brand {
+                padding-top: .75rem;
+                padding-bottom: .75rem;
+                font-size: 1rem;
+                font-weight: 600;
+                letter-spacing: 0.5px;
+            }
+
+            /* Sidebar Styling Fixes */
+            .sidebar {
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                z-index: 100;
+                padding: 48px 0 0;
+                box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+            }
+
+            .sidebar-sticky {
+                position: relative;
+                top: 0;
+                height: calc(100vh - 48px);
+                padding-top: .5rem;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+
+            .sidebar .nav-link {
+                font-weight: 500;
+                color: #94a3b8;
+                padding: 0.75rem 1.5rem;
+                border-left: 3px solid transparent;
+                transition: all 0.2s ease-in-out;
+            }
+
+                .sidebar .nav-link i {
+                    margin-right: 10px;
+                    font-size: 1.1rem;
+                    vertical-align: -1px;
+                }
+
+                .sidebar .nav-link:hover {
+                    color: #fff;
+                    background-color: rgba(255, 255, 255, 0.05);
+                }
+
+                .sidebar .nav-link.active {
+                    color: #fff;
+                    background-color: rgba(255, 255, 255, 0.08);
+                    border-left-color: #0d6efd;
+                }
+
+            /* Responsive spacing offset for the sticky header */
+            @@media (max-width: 767.98px) {
+                .sidebar {
+                    top: 5rem;
+                    padding-top: 0;
+                }
+            }
+    </style>
+</head>
+<body>
+
+    <form id="logoutForm" asp-controller="Account" asp-action="Logout" method="post" class="d-none">
+        @Html.AntiForgeryToken()
+    </form>
+
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow-sm">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-4 bg-dark text-white border-bottom border-secondary border-opacity-25" asp-area="" asp-controller="Home" asp-action="Index">
+            <i class="fa-solid fa-layer-group text-primary me-2"></i>Core Admin
+        </a>
+
+        <div class="d-flex d-md-none align-items-center me-2">
+            <div class="dropdown me-2">
+                <button class="btn btn-link text-light p-0 position-relative dropdown-toggle no-caret" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-circle-user text-info fs-4"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2 bg-dark">
+                    <li>
+                        <span class="dropdown-item-text text-light small border-bottom border-secondary border-opacity-25 pb-2 mb-1">
+                            Logged in as:<br />
+                            <strong class="text-info">@((User.Identity is null || !User.Identity.IsAuthenticated) ? "Guest" : User.Identity.Name)</strong>
+                        </span>
+                    </li>
+                    <li>
+                        <a class="dropdown-item text-danger py-2" href="javascript:void(0);">
+                            <i class="fa-solid fa-right-from-bracket me-2"></i>Sign out
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="#sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
+        <div class="navbar-nav ms-auto flex-row align-items-center d-none d-md-flex">
+            <div class="nav-item text-nowrap px-2">
+                <span class="nav-link text-light fw-medium">
+                    <i class="fa-solid fa-circle-user text-info me-2"></i>Hello,
+                    @if (User.Identity is null || !User.Identity.IsAuthenticated)
+                    {
+                        <span>Guest</span>
+                    }
+                    else
+                    {
+                        @User.Identity.Name
+                    }
+                </span>
+            </div>
+            <div class="nav-item text-nowrap border-start border-secondary border-opacity-50 my-2">
+                <a class="nav-link px-4 text-secondary hover-white btn-logout" href="javascript:void(0);">
+                    <i class="fa-solid fa-right-from-bracket me-1"></i>Sign out
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+                <div class="sidebar-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Home" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Index">
+                                <i class="fa-solid fa-chart-pie"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Products" ? "active" : "")" asp-area="" asp-controller="Products" asp-action="Index">
+                                <i class="fa-solid fa-box"></i>
+                                Products
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/3.7.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
