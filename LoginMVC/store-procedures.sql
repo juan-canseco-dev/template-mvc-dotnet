@@ -47,6 +47,7 @@ BEGIN
         SalePrice = @SalePrice,
         Quantity = @Quantity
     WHERE Id = @ProductId;
+    SELECT @@ROWCOUNT;
 END
 GO
 CREATE OR ALTER PROCEDURE dbo.usp_Product_Delete
@@ -59,6 +60,7 @@ BEGIN
 
     DELETE Products
     WHERE Id = @ProductId;
+    SELECT @@ROWCOUNT;
 END
 GO
 CREATE OR ALTER PROCEDURE dbo.usp_Product_GetById

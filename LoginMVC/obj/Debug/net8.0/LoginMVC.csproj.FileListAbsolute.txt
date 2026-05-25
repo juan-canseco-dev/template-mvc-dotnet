@@ -156,3 +156,4 @@ C:\Users\Juan-Canseco\Worskpace\dotnet\LoginMVC\LoginMVC\obj\Debug\net8.0\ref\Lo
 C:\Users\Juan-Canseco\Worskpace\dotnet\LoginMVC\LoginMVC\obj\Debug\net8.0\scopedcss\Views\Shared\_AdminLayout.cshtml.rz.scp.css
 C:\Users\Juan-Canseco\Worskpace\dotnet\LoginMVC\LoginMVC\bin\Debug\net8.0\Bogus.dll
 C:\Users\Juan-Canseco\Worskpace\dotnet\LoginMVC\LoginMVC\bin\Debug\net8.0\Dapper.dll
+C:\Users\Juan-Canseco\Worskpace\dotnet\LoginMVC\LoginMVC\obj\Debug\net8.0\LoginMVC.sourcelink.json
